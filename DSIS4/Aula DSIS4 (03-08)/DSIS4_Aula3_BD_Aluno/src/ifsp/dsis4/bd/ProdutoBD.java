@@ -23,8 +23,8 @@ import java.util.List;
 public class ProdutoBD {
     
     public void salvar(Produto produto) {
-        String sql = "insert into Produto(idProduto,nomeProduto,dataFabProduto,estoqueProduto,precoProduto) "
-                + "values(seq_produto.nextval,?,?,?,?)";
+        String sql = "insert into Produtoo(idProduto,nomeProduto,dataFabProduto,estoqueProduto,precoProduto) "
+                + "values(id_produto.nextval,?,?,?,?)";
         ConexaoBD conexao = ConexaoBD.getInstance();
         try (
             Connection con = conexao.getConnection();
@@ -50,7 +50,7 @@ public class ProdutoBD {
     }
     
     public List<Produto> listarTodosPeloNome(String substring) {
-        String sql = "select * from Produto where nomeProduto like ?";
+        String sql = "select * from Produtoo where nomeProduto like ?";
         ConexaoBD conexao = ConexaoBD.getInstance();
         List<Produto> produtos = new ArrayList<>();
         try (

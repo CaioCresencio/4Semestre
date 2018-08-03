@@ -5,6 +5,16 @@
  */
 package ifsp.dsis4.visoes;
 
+import com.toedter.calendar.JDateChooser;
+import ifsp.dsis4.bd.ProdutoBD;
+import ifsp.dsis4.entidades.Produto;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.Date;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
@@ -30,6 +40,7 @@ public class JanelaCadastro extends JInternalFrame {
     //componente para inserção da data
     private JTextField fieldEstoque;
     private JTextField fieldPreco;
+    private JDateChooser chooserData;
     
     private JButton buttonInserir;
     private JButton buttonFechar;
@@ -55,20 +66,23 @@ public class JanelaCadastro extends JInternalFrame {
         fieldId = new JTextField(2);
         fieldId.setEditable(false);
         fieldNome = new JTextField(10);
+        chooserData = new JDateChooser();
+        chooserData.setPreferredSize(new Dimension(100,30));
         //componente para inserção da data
         fieldEstoque = new JTextField(3);
         fieldPreco = new JTextField(5);
         
         //buttons
         buttonInserir = new JButton("Inserir");
-        //buttonInserir.addActionListener(...);
+        buttonInserir.addActionListener(this::inserir);
         buttonFechar = new JButton("Fechar");
-        //buttonFechar.addActionListener(...);
+        buttonFechar.addActionListener(this::fechar);
         
         panel.add(labelId);
         panel.add(fieldId);
         panel.add(labelNome);
         panel.add(fieldNome);
+        panel.add(chooserData);
         //adicionar os componentes referentes à data
         panel.add(labelEstoque);
         panel.add(fieldEstoque);
@@ -86,11 +100,26 @@ public class JanelaCadastro extends JInternalFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
     
-    private void inserir() {
-        //completar aqui
+    private void inserir(ActionEvent e) {
+        String nome = fieldNome.getText();
+        Date temp = chooserData.getDate();
+        Instant instant = temp.toInstant();
+        ZonedDateTime dt = instant.atZone(ZoneId.systemDefault());
+        LocalDate dataFab = dt.toLocalDate();
+        int estoque = Integer.parseInt(fieldEstoque.getText());
+        double preco = Double.parseDouble(fieldPreco.getText());
+        Produto produto = new Produto(nome,dataFab,estoque,preco);
+        ProdutoBD produtoBD  = new ProdutoBD();
+        try{
+            produtoBD.salvar(produto);
+            fieldId.setText(String.valueOf(produto.getId()));
+        }catch(Exception erro){
+            System.out.println("Ocorreu um erro "+erro.getMessage());
+        }
+            
     }
     
-    private void fechar() {
+    private void fechar(ActionEvent e) {
         dispose();
     }
 }
