@@ -6,6 +6,7 @@
 package ifsp.dsis4.main;
 
 import ifsp.dsis4.banco.ConexaoBD;
+import ifsp.dsis4.banco.ControladorBD;
 import ifsp.dsis4.front.JanelaPrincipal;
 
 /**
@@ -21,6 +22,8 @@ public class Main {
         }catch(Exception e){
             System.out.println("Algo deu errado: "+e.getMessage());
         }
+        ControladorBD con = new ControladorBD();
+        
         JanelaPrincipal jp = new JanelaPrincipal();
     }
 }

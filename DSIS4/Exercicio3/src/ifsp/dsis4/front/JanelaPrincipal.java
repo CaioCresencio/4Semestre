@@ -47,6 +47,9 @@ public class JanelaPrincipal extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
     private void abrirJanela(ActionEvent e){
+        Consulta con = new Consulta();
+        desktop.add(con);
+        desktop.moveToFront(con);
         
     }
 }

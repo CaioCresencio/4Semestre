@@ -17,8 +17,8 @@ public class ConexaoBD {
     private static ConexaoBD conexaoBD;
     
     private BasicDataSource dataSource;
-    private String user = "caiocresencio";
-    private String pass = "caiocresencio";
+    private String user = "hr";
+    private String pass = "hr";
     private String driver = "oracle.jdbc.OracleDriver";
     private String url = "jdbc:oracle:thin:@localhost:1521:XE";
     
