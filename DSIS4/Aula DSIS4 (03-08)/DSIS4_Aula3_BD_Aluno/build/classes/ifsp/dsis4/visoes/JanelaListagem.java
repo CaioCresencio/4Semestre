@@ -100,7 +100,7 @@ public class JanelaListagem extends JInternalFrame {
                 
             }
         }catch(Exception erro){
-            JOptionPane.showMessageDialog(null," Algo deu errado "+erro.getMessage()); 
+            JOptionPane.showMessageDialog(null," Algo deu muito errado "+erro.getMessage()); 
         }
     }
     

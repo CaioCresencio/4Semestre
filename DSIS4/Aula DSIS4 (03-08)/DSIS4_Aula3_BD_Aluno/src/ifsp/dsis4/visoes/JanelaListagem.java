@@ -93,14 +93,15 @@ public class JanelaListagem extends JInternalFrame {
         ProdutoBD produtoBD = new ProdutoBD();
        
         try{
+             System.out.println("depois");
             List<Produto> lista = produtoBD.listarTodosPeloNome(termo);
+           
             for(Produto p: lista){
-                
                 model.addRow(new ProdutoUtil().toArray(p));
                 
             }
         }catch(Exception erro){
-            JOptionPane.showMessageDialog(null," Algo deu errado "+erro.getMessage()); 
+            JOptionPane.showMessageDialog(null," Algo deu muito errado "+erro.getMessage()); 
         }
     }
     

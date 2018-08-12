@@ -25,6 +25,7 @@ public class ProdutoUtil {
                 String estoque = String.valueOf(p.getPreco());
                 String tempo = formatarData(p.getDataFab());
                  Object[] linha ={nome,data,estoque,preco,tempo};
+                 System.out.println(linha.toString());
                  return linha;
     }
     private String formatarData(LocalDate data){
@@ -37,14 +38,7 @@ public class ProdutoUtil {
         formatter.setMinimumFractionDigits(2);
         return formatter.format(preco);
     }
-    public String getExistencia(LocalDate data){
-        LocalDate atual = LocalDate.now();
-        LocalDate fab =data;
-        
-        Period periodo = Period.between(atual, fab);
-        String retorno = "";
-        return  retorno;
-        
-    }
+
+  
     
 }

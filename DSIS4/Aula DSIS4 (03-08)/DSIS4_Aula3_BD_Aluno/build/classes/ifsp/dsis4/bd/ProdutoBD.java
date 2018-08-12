@@ -23,7 +23,7 @@ import java.util.List;
 public class ProdutoBD {
     
     public void salvar(Produto produto) {
-        String sql = "insert into Produtoo(idProduto,nomeProduto,dataFabProduto,estoqueProduto,precoProduto) "
+        String sql = "insert into Produto(idProduto,nomeProduto,dataFabProduto,estoqueProduto,precoProduto) "
                 + "values(id_produto.nextval,?,?,?,?)";
         ConexaoBD conexao = ConexaoBD.getInstance();
         try (
@@ -41,6 +41,7 @@ public class ProdutoBD {
             try(ResultSet rs = pStat.getGeneratedKeys()){
                 if(rs.next()){
                     long id = rs.getLong(1);
+                    produto.setId(id);
                 }
             }
         }
@@ -50,7 +51,7 @@ public class ProdutoBD {
     }
     
     public List<Produto> listarTodosPeloNome(String substring) {
-        String sql = "select * from Produtoo where nomeProduto like ?";
+        String sql = "select * from Produto where nomeProduto like ?";
         ConexaoBD conexao = ConexaoBD.getInstance();
         List<Produto> produtos = new ArrayList<>();
         try (
