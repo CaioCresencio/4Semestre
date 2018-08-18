@@ -6,8 +6,11 @@
 package ifsp.dsis4.principal;
 
 import ifsp.dsis4.bd.ConexaoBD;
+import ifsp.dsis4.bd.ProdutoBD;
+import ifsp.dsis4.entidades.Produto;
 import ifsp.dsis4.visoes.JanelaPrincipal;
 import java.sql.Connection;
+import java.time.LocalDate;
 
 /**
  *
@@ -19,6 +22,11 @@ public class Principal {
         try {
             ConexaoBD conexao = ConexaoBD.getInstance();
             Connection con = conexao.getConnection();
+            /*ProdutoBD pBD = new ProdutoBD();
+            LocalDate ld = LocalDate.now();
+            for(int i=1;i<=200;i++){
+                pBD.salvar(new Produto("teste",ld,1,2));
+            }*/
             System.out.println("Conexão realizada com sucesso");
             JanelaPrincipal janela = new JanelaPrincipal();
         }
