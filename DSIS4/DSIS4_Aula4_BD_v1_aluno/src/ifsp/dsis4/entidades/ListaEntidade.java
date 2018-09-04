@@ -24,7 +24,10 @@ public class ListaEntidade {
         this.colunas = colunas;
         linhas = new ArrayList<>();
     }
-    
+    public ListaEntidade(){
+        colunas = null;
+        linhas = new ArrayList<>();
+    }
     public boolean addLinha(Object[] linha){
         return linhas.add(linha);
     }
@@ -37,5 +40,8 @@ public class ListaEntidade {
             System.arraycopy(linhas.get(i), 0, matriz[i], 0, colunas.length);
         }
         return matriz;
+    }
+    public int getSize(){
+        return colunas.length;
     }
 }

@@ -48,7 +48,54 @@ public class EntidadeBD {
             throw new RuntimeException(erro);
         }
         return lista;
-    } 
+    }
+    
+    public ListaEntidade buscarIntervalo(String nomeTabela,int max,int min) {
+        String sql = "";
+        if(checaTabela(nomeTabela.toUpperCase())){
+          sql = String.format("select * from ((select e.*,rownum rn from (select * from %s order by %s) e where rownum <= %d ) ) where rn >= %d",nomeTabela,getPK(nomeTabela),max,min);
+        }
+        ConexaoBD conexao = ConexaoBD.getInstance();
+        ListaEntidade lista = null;
+        try (
+            Connection con = conexao.getConnection();
+            PreparedStatement pStat = con.prepareStatement(sql);
+            ResultSet rs = pStat.executeQuery()) 
+        {
+            ResultSetMetaData rsmd = rs.getMetaData();
+            String[] colunas = getColunas(rsmd);
+            lista = new ListaEntidade(colunas);
+            while(rs.next()){
+                Object[] linha = new Object[colunas.length];
+                for(int i = 0; i<colunas.length; i++){
+                    linha[i] = rs.getObject(i+1);
+                }
+                lista.addLinha(linha);
+            }
+        }
+        catch(SQLException erro) {
+            throw new RuntimeException(erro);
+        }
+        return lista;
+    }
+    public String getPK(String nomeTabela){
+        ConexaoBD conexao = ConexaoBD.getInstance();
+        String retorno = null;
+        try(
+        Connection con = conexao.getConnection())
+        {
+            DatabaseMetaData dmd = con.getMetaData();
+            try( ResultSet rs = dmd.getPrimaryKeys(null, null, nomeTabela)){
+                if(rs.next()){
+                    retorno = rs.getString("COLUMN_NAME");
+                }
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return retorno;
+        
+    }
     public boolean checaTabela(String nomeTabela){
         ConexaoBD conexao = ConexaoBD.getInstance();
         boolean deuCerto = false;

@@ -1,0 +1,44 @@
+Lista de exercícios 4:
+
+1.1-- Duas, a primeira inicia em t0 e termina em t9, a segunda inicia em t10 e termina em t12
+
+1.2-- Greene = 10000; Banda = 7000
+
+
+2.1 -- Primeira sessão no t1 e segunda no t2
+2.2 -- A primeira bloqueia o usuario employee_id 100
+       O segunda bloqueia o usuario employee_id 101 
+
+2.3 --  Não pois, ambas atualizam linhas diferentes.
+
+2.4 -- sessão 1: 
+            100: 2100 
+            101: 3000
+       sessão 2:
+            100: 2000
+            103: 3100
+       sessão 3:
+            100: 2000
+            101: 3000
+2.5 --
+    sessão 1: 
+            100: 2100 
+            101: 3000
+       sessão 2:
+            100: 2100
+            103: 3100
+       sessão 3:
+            100: 2100
+            101: 3000
+2.6 --
+    sessão 1: 
+            100: 2100 
+            101: 3000
+       sessão 2:
+            100: 2000
+            103: 3000
+       sessão 3:
+            100: 2000
+            101: 3000
+
+2.7 -- Nenhuma pois o usuario não realizou um commit;

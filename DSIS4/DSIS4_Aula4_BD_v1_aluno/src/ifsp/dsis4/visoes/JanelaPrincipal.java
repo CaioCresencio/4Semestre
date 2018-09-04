@@ -31,9 +31,12 @@ public class JanelaPrincipal extends JFrame {
     private JScrollPane scroll;
     private JButton buttonListar;
     private JButton buttonFechar;
+    private JButton buttonProx;
+    private JButton buttonAnt;
     private ListaEntidade lista;
     private JTextField nomeT;
     private JComboBox combo;
+    private ControlePag controle;
     
     
     public JanelaPrincipal() {
@@ -64,10 +67,17 @@ public class JanelaPrincipal extends JFrame {
         buttonFechar = new JButton("Fechar");
         buttonFechar.addActionListener(event -> fechar());
         
+        buttonProx = new JButton(" > ");
+        buttonProx.addActionListener(event -> buscaProx());
+        buttonAnt = new JButton(" < ");
+        buttonAnt.addActionListener(event -> buscaAnt());
+        
         panel.add(combo);
         panel.add(buttonListar);
         panel.add(buttonFechar);
         panel.add(scroll);
+        panel.add(buttonAnt);
+        panel.add(buttonProx);
         add(panel);
     }
     
@@ -84,11 +94,23 @@ public class JanelaPrincipal extends JFrame {
         String nomeTabela = String.valueOf(combo.getSelectedItem());
         System.out.println(nomeTabela);
         entBD.listaTabelas();
-        //ListaEntidade lista = entBD.buscarEntidades(nomeTabela);
+        controle = new ControlePag(lista);
+        lista = entBD.buscarIntervalo(nomeTabela,100,1);
+      
         
-        
-        //model.setDataVector(lista.toAarray2d(),lista.getCOlunas());
+       // model.setDataVector(lista.toAarray2d(),lista.getCOlunas());
     }
+    public void buscaProx(){
+        //ListaEntidade conteudo = controle.getProx() ;
+        if( controle.getProx() != null){
+            ListaEntidade conteudo = controle.getProx();
+            model.setDataVector(conteudo.toAarray2d(),conteudo.getCOlunas());
+        }
+    }
+    public void buscaAnt(){
+        
+    }
+
     private void listarCombo(){
         EntidadeBD entBD = new EntidadeBD();
         List<String> tabelas = entBD.listaTabelas();
