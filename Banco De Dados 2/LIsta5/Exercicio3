@@ -1,0 +1,22 @@
+3.1:
+    -Sessão 3 - inicia em t2 e termina em t4
+    -Sessão 1 - inicia em t0 e termina em t6   
+    -Sessão 2 - inicia após t6
+    
+3.2: 
+    Sessão 1 não ocorre lock
+    Sessão 2 ocorre um lock na tentativa de update pois a sessão t1
+está realizando alterações no employee_id 200
+    Sessão 3 não ocorre lock
+
+3.3:
+    A segunda transação, pois a primeira transação está utilizando 
+o employee_id 200
+
+3.4:
+    Update no employee_id 100 aumenta o salario em 1000
+    Update no employee_id 200 aumenta o salario em 500
+
+Somente essas alterações são realizadas pois as outras tentativas de alteração
+foram barradas por conta de bloqueios e rollback.
+

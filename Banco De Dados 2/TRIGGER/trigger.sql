@@ -1,0 +1,11 @@
+SET SERVEROUTPUT ON;
+
+-- INSERINDO NOVO USUARIO
+CREATE OR REPLACE TRIGGER dml_func
+    BEFORE INSERT ON emp.funcionarios
+BEGIN
+    DBMS_OUTPUT.PUT_lINE('Novo funcionario inserido.');
+END;
+/
+
+
